@@ -1,0 +1,912 @@
+/* COLOR PALETTE */
+:root {
+--color-red: #D02C29;
+--color-green: #6BA232;
+--color-dark-blue: #27346B;
+--color-yellow: #F6D737;
+--color-medium-blue: #2E4895;
+--color-pink: #F29BB6;
+--color-light-yellow: #FAECB9;
+--color-deep-green: #57820A;
+--color-magenta: #E54A79;
+--main-font: slight-chance, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden; 
+    background-color: #000;
+}
+
+/* Container chứa toàn bộ trang Home */
+.homepage-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #ffffff;
+    padding: 2rem;
+    
+    /* BACKGROUND */
+    background-image: url('/backgrounds_and_assets/home_1.png'); /* Thay tên file ảnh của bạn vào đây */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.main-heading {
+    font-family: slight-chance, sans-serif;
+    font-size: clamp(4rem, 12vw, 18rem); /* Co giãn linh hoạt tương đương ~230pt trên màn hình lớn */
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    line-height: 0.9;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+}
+
+/* Subheading [phố cổ Hải Thượng Lãn Ông] */
+.sub-heading {
+    font-family: slight-chance, sans-serif;
+    font-size: clamp(1.8rem, 4.5vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 3.5rem;
+}
+
+
+.visit-link {
+    font-family: slight-chance, sans-serif;
+    color: #ffffff;
+    font-size: clamp(1rem, 2vw, 2rem);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    letter-spacing: 0.05em;
+    transition: opacity 0.3s ease;
+}
+
+.visit-link:hover {
+    color: var(--color-pink); 
+    opacity: 1;
+}
+
+/* Canvas overlay cho hiệu ứng dissolve */
+#dissolve-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* Không cản trở click chuột */
+    z-index: 5;
+}
+
+/* Khung chứa các văn bản chính (Heading & Subheading) */
+.text-content {
+    /* Transition kết hợp giữa Opacity và Filter (Blur) trong đúng 0.2s */
+    transition: opacity 0.2s ease, filter 0.2s ease, visibility 0.2s ease;
+    z-index: 2;
+    opacity: 1;
+    filter: blur(0px);
+}
+
+/* Trạng thái 1: Trong lúc delay 0.2s -> Bắt đầu mờ dần và blur */
+.text-content.fading {
+    opacity: 0.2;
+    filter: blur(4px);
+}
+
+/* Trạng thái 2: Sau 0.2s -> Ẩn hoàn toàn để nhường chỗ cho các hạt canvas */
+.text-content.dissolved {
+    opacity: 0;
+    filter: blur(8px);
+    visibility: hidden;
+}
+
+/* ==========================================
+INTRO PAGE STYLES & ANIMATION
+========================================== */
+.intro-container {
+width: 100vw;
+height: 100vh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+position: relative;
+padding: 2rem 4rem;
+background-image: url('/backgrounds_and_assets/intro.png');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+}
+
+/* animation */
+.text-stage {
+position: relative;
+width: 85%;
+max-width: 1100px;
+height: 350px;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+
+.animated-quote {
+font-family: slight-chance, sans-serif;
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+text-align: center;
+color: #ffffff;
+font-size: clamp(1.8rem, 3.1vw, 2.375rem); 
+line-height: 1.5;
+font-weight: 300;
+opacity: 0; 
+}
+
+/*
+Thời gian tổng 1 chu kỳ animation: 22 giây
+
+Passage 1:
+0% -> 9%: Fade in (2s)
+9% -> 45%: Đứng yên (8s)
+45% -> 54%: Fade out (2s)
+
+Passage 2:
+54% -> 63%: Fade in (2s)
+63% -> 91%: Đứng yên (8s)
+91% -> 100%: Mờ dần / Giữ nguyên
+*/
+.passage-1 {
+animation: fadeSequenceOne 14s ease-in-out infinite;
+}
+
+.passage-2 {
+animation: fadeSequenceTwo 14s ease-in-out infinite;
+}
+
+@keyframes fadeSequenceOne {
+0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    3.57% { /* ~0.5s: Fade in xong */
+        opacity: 1;
+        transform: translateY(0);
+    }
+    35.71% { /* ~5.0s: Giữ nguyên độ hiện rõ trong 5s */
+        opacity: 1;
+        transform: translateY(0);
+    }
+    39.28% { /* ~5.5s: Fade out xong */
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% { /* Đợi cho đến hết chu kỳ 14s rồi quay lại 0% */
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes fadeSequenceTwo {
+0%, 39.28% { /* Đợi 5.5s đầu tiên */
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    42.85% { /* ~6.0s: Fade in xong */
+        opacity: 1;
+        transform: translateY(0);
+    }
+    92.85% { /* ~13.0s: Giữ nguyên độ hiện rõ trong 7s */
+        opacity: 1;
+        transform: translateY(0);
+    }
+    96.42% { /* ~13.5s: Fade out xong */
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% { /* Đợi 0.5s còn lại rồi quay lại 0% */
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+/* Nút "continue" ở góc dưới */
+.continue-link {
+position: absolute;
+bottom: 4rem;
+color: #ffffff;
+font-family: slight-chance, sans-serif;
+font-size: clamp(1rem, 2vw, 1.8rem);
+text-decoration: underline;
+text-underline-offset: 6px;
+letter-spacing: 0.05em;
+transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+.continue-link:hover {
+color: var(--color-pink);
+opacity: 1;
+}
+/* ==========================================
+LANDING PAGE STYLES
+========================================== */
+.landing-container {
+width: 100vw;
+height: 100vh;
+position: relative;
+display: flex;
+justify-content: center;
+align-items: center;
+background-image: url('/backgrounds_and_assets/landing.png');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+overflow: hidden;
+}
+
+/* Khung placeholder 415px x 415px chính giữa */
+.center-symbol-placeholder {
+width: 400px;
+height: 400px;
+position: absolute;
+top: 46%;
+left: 50%;
+transform: translate(-50%, -50%);
+display: flex;
+justify-content: center;
+align-items: center;
+pointer-events: none; 
+background-image: url('/backgrounds_and_assets/Asset\ 11.svg');
+}
+
+.placeholder-svg {
+width: 100%;
+height: 100%;
+}
+
+/* Khối link chữ điều hướng */
+.nav-node {
+position: absolute;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+text-decoration: none;
+color: #ffffff;
+cursor: pointer;
+transition: filter 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+user-select: none;
+}
+
+/* Kích thước chữ Tiếng Việt (~80pt) và Hán tự (~70pt) */
+.nav-node .viet-title {
+font-family: slight-chance, sans-serif;
+font-size: clamp(2.2rem, 4.4vw, 4.375rem); 
+font-weight: 500;
+line-height: 1;
+letter-spacing: 0.02em;
+text-transform: uppercase;
+}
+
+.nav-node .kanji-title {
+font-family: noto-sans-sc, sans-serif;
+font-weight: 700;
+font-size: clamp(2rem, 4.2vw, 4rem); /* Tương đương ~70pt */
+font-weight: 400;
+line-height: 1.1;
+margin-top: 0.2rem;
+}
+
+/* Hiệu ứng hover blur khoảng 10% (~3px - 4px blur) */
+.nav-node:hover {
+color:#D02C29;
+filter: blur(4px);
+opacity: 0.85;
+}
+
+/* Định vị 4 hướng theo ảnh mẫu /
+/ TOP: [THỰC] / 食 */
+.node-top {
+top: 5vh;
+left: 50%;
+transform: translateX(-50%);
+}
+
+/* LEFT: [Y] / 衣 */
+.node-left {
+top: 50%;
+left: 12vw;
+transform: translateY(-50%);
+}
+
+/* RIGHT: [DƯỢC] / 藥 */
+.node-right {
+top: 50%;
+right: 12vw;
+transform: translateY(-50%);
+}
+
+/* BOTTOM: [THƯỞNG] / 賞 */
+.node-bottom {
+bottom: 12vh;
+left: 50%;
+transform: translateX(-50%);
+}
+
+/* Dòng chữ liên kết "done visiting" phía dưới cùng */
+.done-visiting-link {
+position: absolute;
+bottom: 3.5rem;
+left: 50%;
+transform: translateX(-50%);
+color: #ffffff;
+font-family: slight-chance, sans-serif;
+font-size: clamp(1rem, 2vw, 1.8rem);
+text-decoration: underline;
+text-underline-offset: 6px;
+letter-spacing: 0.05em;
+transition: color 0.3s ease, opacity 0.3s ease;
+z-index: 10;
+}
+
+.done-visiting-link:hover {
+color: var(--color-red);
+opacity: 1;
+}
+/* ==========================================
+   TRANG THỰC (PAGE 1) - PHÙNG HƯNG MARKET
+   ========================================== */
+
+.page-thuc-body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #000;
+    font-family: var(--main-font);
+}
+
+.page-thuc-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    padding: 2.5rem 3.5rem;
+    color: #ffffff;
+    background-image: url('/backgrounds_and_assets/thực.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.back-link {
+    position: absolute;
+    top: 2rem;
+    left: 3rem;
+    font-size: 24pt;
+    color: var(--color-red);
+    text-decoration:underline;
+    font-weight: 500;
+    transition: opacity 0.3s ease, color 0.3s ease;
+    z-index: 10;
+}
+
+.back-link:hover {
+    color: #ffffff;
+    opacity: 0.8;
+}
+
+.header-group {
+    position: absolute;
+    top: 6.5rem;
+    left: 3rem;
+    z-index: 5;
+}
+
+.thuc-heading {
+    font-size: 90pt;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    line-height: 0.95;
+    color:#FAECB9;
+    text-transform: uppercase;
+}
+
+.thuc-subheading {
+    font-size: 30pt;
+    font-weight: 400;
+    color:#FAECB9;
+    margin-top: 1rem;
+    margin-left: 28vw;
+}
+
+.interactive-area {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.spot-item {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.number-btn {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background-color: #ffffff;
+    border: none;
+    color: var(--color-red);
+    font-family: slight-chance, sans-serif;
+    font-size: 30pt;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.number-btn:hover {
+    transform: scale(1.08);
+    background-color:#D02C29;
+    color:#ffffff;
+}
+
+/* CẤU HÌNH CÁC KHỐI RED PLACEHOLDER DÙNG ĐỂ THÊM HÌNH BACKGROUND */
+.red-placeholder-shape {
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none;
+    
+    /* HIỆU ỨNG FADE IN / FADE OUT */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.5s ease;
+    transform: scale(0.95);
+    z-index: 15;
+}
+
+.red-placeholder-shape.active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+/* VỊ TRÍ CHI TIẾT & CHỖ ĐỂ THÊM BACKGROUND ASSETS */
+
+/* Khối 1: Con vịt quay bên trái */
+.spot-1 {
+    top: 32%;
+    left: 4%;
+    width: 280px;
+    height: 480px;
+}
+.spot-1 .number-btn {
+    top: -30px;
+    left: 50px;
+}
+.spot-1 .red-placeholder-shape {
+    width: 120%;
+    height: 120%;
+ background-image: url('/backgrounds_and_assets/vit.png');
+ mix-blend-mode:hard-light; 
+}
+
+/* Khối 2: Cụm giữa phía dưới */
+.spot-2 {
+    bottom: 5%;
+    left: 36%;
+    width: 340px;
+    height: 320px;
+}
+.spot-2 .number-btn {
+    bottom: 0px;
+    left: -40px;
+}
+.spot-2 .red-placeholder-shape {
+    width: 160%;
+    height: 160%;
+    bottom:2px;
+    background-image: url('/backgrounds_and_assets/banh.png');
+   mix-blend-mode:hard-light;
+}
+
+/* Khối 3: Bát mì góc trên bên phải */
+.spot-3 {
+    top: 14%;
+    right: 8%;
+    width: 420px;
+    height: 300px;
+}
+.spot-3 .number-btn {
+    bottom: 30px;
+    left: 30px;
+}
+.spot-3 .red-placeholder-shape {
+    width: 120%;
+    height: 120%;
+    background-image: url('/backgrounds_and_assets/mi.png'); 
+    mix-blend-mode:hard-light;
+}
+
+/* Khối 4: Khối tròn góc dưới bên phải */
+.spot-4 {
+    bottom: 8%;
+    right: 5%;
+    width: 360px;
+    height: 280px;
+}
+.spot-4 .number-btn {
+    bottom: 0px;
+    right: -20px;
+}
+.spot-4 .red-placeholder-shape {
+    width: 120%;
+    height: 120%;
+    background-image: url('/backgrounds_and_assets/bao.png');
+    mix-blend-mode:hard-light;
+}
+/* ==========================================
+   TRANG Y (PAGE 2) - SOÁI KÌNH LÂM FABRIC MARKET
+   ========================================== */
+
+.page-y-body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #000;
+    font-family: var(--main-font);
+}
+
+.page-y-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    padding: 3rem;
+    box-sizing: border-box;
+    /* BACKGROUND IMAGE PLACEHOLDER */
+    background-image: url('/backgrounds_and_assets/y.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Heading nằm sát góc dưới bên phải */
+.y-heading {
+    position: absolute;
+    bottom: 2.5rem;
+    right: 3.5rem;
+    font-size: 90pt;
+    font-weight: 500;
+    color: var(--color-magenta); 
+    text-align: right;
+    margin: 0;
+    line-height: 1;
+}
+
+/* Layout chứa các đoạn văn bản */
+.text-cascade-container {
+    position: absolute;
+    top: 5%;
+    left: 17%;
+    width: 75vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Phong cách chữ chuẩn cho 6 đoạn */
+.cascade-item {
+    font-size: 24pt; /* Kích thước ~38pt */
+    line-height: 1.15;
+    color: var(--color-red);
+    margin: 0;
+    max-width: 550px;
+    
+    /* Cấu hình animation xuất hiện */
+    opacity: 0;
+    transform: translateY(15px);
+    animation: fadeInText 1.2s ease-out forwards;
+    
+    /* Hiệu ứng mượt khi Hover chuyển màu */
+    transition: color 0.3s ease, transform 0.3s ease;
+    cursor: default;
+}
+
+/* HIỆU ỨNG HOVER ĐỔI MÀU */
+.cascade-item:hover {
+    color: #2FD3D6;
+    background-color:#0328E9;
+    transform: translateX(5px);
+}
+
+/* VỊ TRÍ SẮP XẾP BẬC THANG THEO HÌNH MẪU */
+.item-1 { align-self: flex-start; margin-left: 0; }
+.item-2 { align-self: flex-start; margin-left: 8vw; }
+.item-3 { align-self: flex-start; margin-left: 4vw; }
+.item-4 { align-self: flex-start; margin-left: 30vw; }
+.item-5 { align-self: flex-start; margin-left: 1vw; }
+.item-6 { align-self: flex-start; margin-left: 26vw; }
+
+/* DELAY LẦN LƯỢT XUẤT HIỆN TỪNG ĐOẠN CHỮ (CHỈ XUẤT HIỆN 1 LẦN DỰA VÀO FORWARDS) */
+.item-1 { animation-delay: 0.3s; }
+.item-2 { animation-delay: 1.1s; }
+.item-3 { animation-delay: 1.9s; }
+.item-4 { animation-delay: 2.7s; }
+.item-5 { animation-delay: 3.5s; }
+.item-6 { animation-delay: 4.3s; }
+
+/* KEYFRAME ANIMATION FADE IN */
+@keyframes fadeInText {
+    0% {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* ==========================================
+   TRANG THƯỞNG (PAGE 3) - FESTIVAL DECORATION STREET
+   ========================================== */
+
+.page-thuong-body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #000;
+    font-family: var(--main-font);
+}
+
+.page-thuong-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    padding: 3rem;
+    box-sizing: border-box;
+    /* BACKGROUND IMAGE PLACEHOLDER */
+    background-image: url('/backgrounds_and_assets/thưởng.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Header sát góc dưới bên phải */
+.thuong-header-group {
+    position: absolute;
+    bottom: 2rem;
+    right: 3rem;
+    text-align: right;
+    z-index: 10;
+}
+
+.thuong-subheading {
+    font-size: clamp(1.2rem, 2.5vw, 32pt);
+    font-weight: 400;
+    color: #ffffff;
+    margin-bottom: 0.2rem;
+}
+
+.thuong-heading {
+    font-size: clamp(2.5rem, 5.5vw, 85pt);
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0;
+    line-height: 0.95;
+    text-transform: uppercase;
+}
+
+/* Cấu trúc các khối chữ trong khu vực vòng tròn */
+.circles-text-layout {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.thuong-quote-block {
+    position: absolute;
+    font-size: 18pt; /* Kích thước ~24pt */
+    line-height: 1.25;
+    color: #ffffff;
+    text-align: center;
+    
+    /* Animation Fade In 1 lần */
+    opacity: 0;
+    transform: scale(0.95);
+    animation: fadeInCircle 1.2s ease-out forwards;
+    cursor: pointer;
+}
+
+/* Vị trí chuẩn theo layout hình mẫu */
+.block-1 {
+    top: 18%;
+    left: 24%;
+    max-width: 220px;
+    animation-delay: 0.4s;
+}
+
+.block-2 {
+    bottom: 15%;
+    left: 5%;
+    max-width: 277px;
+    animation-delay: 1.2s;
+}
+
+.block-3 {
+    top: 32%;
+    right: 17%;
+    max-width: 440px;
+    animation-delay: 2s;
+}
+
+/* Style từng chữ cái độc lập để phục vụ hiệu ứng vỡ tung */
+.shatter-char {
+    display: inline-block;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                color 0.3s ease, 
+                text-shadow 0.3s ease, 
+                opacity 0.3s ease;
+    will-change: transform;
+}
+
+/* HIỆU ỨNG PHÁT SÁNG KHI HOVER KHỐI CHỮ */
+.thuong-quote-block:hover .shatter-char {
+    color: var(--color-yellow);
+    text-shadow: 0 0 12px var(--color-red), 0 0 24px rgba(246, 215, 55, 0.8);
+}
+
+/* KEYFRAME FADE IN */
+@keyframes fadeInCircle {
+    0% {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+/* ==========================================
+   TRANG DƯỢC (PAGE 4) - TRADITIONAL MEDICINE STREET
+   ========================================== */
+
+.page-duoc-body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #000;
+    font-family: var(--main-font);
+}
+
+.page-duoc-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    padding: 3rem;
+    box-sizing: border-box;
+    /* BACKGROUND IMAGE PLACEHOLDER */
+    background-image: url('/backgrounds_and_assets/dược.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Heading góc trên bên phải */
+.duoc-header-group {
+    position: absolute;
+    top: 10rem;
+    right: 3rem;
+    text-align: right;
+    z-index: 10;
+}
+
+.duoc-heading {
+    font-size: clamp(2.5rem, 5vw, 80pt);
+    font-weight: 800;
+    color: var(--color-medium-blue); 
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+/* Khung hiển thị trung tâm theo layout hình mẫu */
+.duoc-interactive-wrapper {
+    position: absolute;
+    top: 70%;
+    left: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    z-index: 15;
+}
+
+.next-btn-bottom-right {
+    position: absolute;
+    bottom: 2.5rem;
+    right: 3.5rem;
+    background: none;
+    border: none;
+    color:#D02C29;
+    font-family: var(--main-font);
+    font-size: clamp(1.2rem, 2.2vw, 30pt);
+    font-weight: 500;
+    cursor: pointer;
+    z-index: 20;
+    padding: 0;
+    transition: color 0.3s ease, opacity 0.3s ease, transform 0.2s ease;
+}
+
+.next-btn-bottom-right:hover {
+    color: var(--color-medium-blue); /* Đổi sang màu vàng khi hover */
+    opacity: 0.9;
+    filter:blur(4px);
+    transform: scale(1.03);
+}
+
+/* Container chứa tối đa 3 hàng ô chữ */
+.word-tiles-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    max-width: 750px;
+}
+
+/* Mỗi hàng (tối đa 5 ô) */
+.tile-row {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.6rem;
+}
+
+/* Thẻ Ô Chữ (Tile Badge) */
+.word-tile {
+    background: linear-gradient(180deg, #fcecba 0%, #f9df93 100%); /* Linear gradient theo yêu cầu */
+    border: 3px solid var(--color-dark-blue); /* Stroke màu xanh đen #27346B */
+    color: var(--color-medium-blue); /* Font chữ màu xanh đen */
+    font-size:  21pt; /* Kích thước ~21pt */
+    font-weight: 500;
+    padding: 0.7rem 1.4rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    
+    /* Animation rơi nhẹ từ trên xuống */
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: dropInTile 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* KEYFRAME ANIMATION RƠI NHẸ */
+@keyframes dropInTile {
+    0% {
+        opacity: 0;
+        transform: translateY(-25px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tetraglyph</title>
+    <link rel="stylesheet" href="style.css">
+<script>
+  (function(d) {
+    var config = {
+      kitId: 'aqo4hfm',
+      scriptTimeout: 3000,
+      async: true
+    },
+    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+  })(document);
+</script>
+</head>
+<body class="page-duoc-body">
+
+    <main class="page-duoc-container">
+        <!-- Nút Back góc trên bên trái -->
+        <a href="landing.html" class="back-link">back</a>
+
+        <!-- Tiêu đề góc trên bên phải -->
+        <div class="duoc-header-group">
+            <h1 class="duoc-heading">TRADITIONAL MEDICINE STREET</h1>
+        </div>
+
+        <!-- KHUNG HIỂN THỊ CÁC Ô CHỮ -->
+        <div class="duoc-interactive-wrapper">
+            <div id="word-tiles-container" class="word-tiles-container"></div>
+        </div>
+
+        <!-- NÚT READ NEXT Ở GÓC DƯỚI BÊN PHẢI MÀN HÌNH -->
+        <button id="next-text-btn" class="next-btn-bottom-right">[click here to read next]</button>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

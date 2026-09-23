@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tetraglyph</title>
+    <link rel="stylesheet" href="style.css">
+<script>
+  (function(d) {
+    var config = {
+      kitId: 'aqo4hfm',
+      scriptTimeout: 3000,
+      async: true
+    },
+    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+  })(document);
+</script>
+</head>
+<body class="page-thuc-body">
+
+    <main class="page-thuc-container">
+        <!-- Nút Back góc trên bên trái -->
+        <a href="landing.html" class="back-link">back</a>
+
+        <!-- Tiêu đề chính và Subheading -->
+        <div class="header-group">
+            <h1 class="thuc-heading">PHÙNG HƯNG MARKET</h1>
+            <h2 class="thuc-subheading">[click the number]</h2>
+        </div>
+
+        <!-- VÙNG CHỨA 4 PLACEHOLDER VÀ Ô SỐ TƯƠNG TÁC -->
+        <div class="interactive-area">
+
+            <!-- KHỐI 1: Vịt quay (Bên trái) -->
+            <div class="spot-item spot-1">
+                <button class="number-btn" data-target="red-shape-1" aria-label="Toggle Image 1">1</button>
+                <div id="red-shape-1" class="red-placeholder-shape shape-1"></div>
+            </div>
+
+            <!-- KHỐI 2: Cụm giữa phía dưới -->
+            <div class="spot-item spot-2">
+                <button class="number-btn" data-target="red-shape-2" aria-label="Toggle Image 2">2</button>
+                <div id="red-shape-2" class="red-placeholder-shape shape-2"></div>
+            </div>
+
+            <!-- KHỐI 3: Bát mì góc trên bên phải -->
+            <div class="spot-item spot-3">
+                <button class="number-btn" data-target="red-shape-3" aria-label="Toggle Image 3">3</button>
+                <div id="red-shape-3" class="red-placeholder-shape shape-3"></div>
+            </div>
+
+            <!-- KHỐI 4: Khối tròn góc dưới bên phải -->
+            <div class="spot-item spot-4">
+                <button class="number-btn" data-target="red-shape-4" aria-label="Toggle Image 4">4</button>
+                <div id="red-shape-4" class="red-placeholder-shape shape-4"></div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

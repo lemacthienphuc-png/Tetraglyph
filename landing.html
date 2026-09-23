@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tetraglyph</title>
+    <link rel="stylesheet" href="style.css">
+<script>
+  (function(d) {
+    var config = {
+      kitId: 'aqo4hfm',
+      scriptTimeout: 3000,
+      async: true
+    },
+    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+  })(document);
+</script>
+</head>
+<body>
+
+<main class="landing-container">
+    
+    <!-- Khung placeholder ở trung tâm (kích thước 415px x 415px) -->
+    <div class="center-symbol-placeholder">
+        <!-- SVG / Image Placeholder -->
+        <svg class="placeholder-svg" viewBox="0 0 415 415" fill="none" xmlns="file:///C:/Users/lemac/Downloads/Tetraglyph/backgrounds_and_assets/Asset%2011.svg">
+        </svg>
+    </div>
+
+    <!-- 4 Nhóm điều hướng ở 4 hướng xung quanh symbol -->
+    
+    <!-- TOP: [THỰC] / 食 -> page1.html -->
+    <a href="thuc.html" class="nav-node node-top">
+        <span class="viet-title">[THỰC]</span>
+        <span class="kanji-title">食</span>
+    </a>
+
+    <!-- LEFT: [Y] / 衣 -> page2.html -->
+    <a href="y.html" class="nav-node node-left">
+        <span class="viet-title">[Y]</span>
+        <span class="kanji-title">衣</span>
+    </a>
+
+    <!-- RIGHT: [DƯỢC] / 藥 -> page4.html -->
+    <a href="duoc.html" class="nav-node node-right">
+        <span class="viet-title">[DƯỢC]</span>
+        <span class="kanji-title">藥</span>
+    </a>
+
+    <!-- BOTTOM: [THƯỞNG] / 賞 -> page3.html -->
+    <a href="thuong.html" class="nav-node node-bottom">
+        <span class="viet-title">[THƯỞNG]</span>
+        <span class="kanji-title">賞</span>
+    </a>
+
+    <!-- Nút "done visiting" ở đáy trang -> outro.html -->
+    <a href="outro.html" class="done-visiting-link">done visiting</a>
+
+</main>
+</body>
+</html>
