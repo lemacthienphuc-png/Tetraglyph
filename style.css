@@ -38,7 +38,7 @@ html, body {
     padding: 2rem;
     
     /* BACKGROUND */
-    background-image: url('/backgrounds_and_assets/home_1.png'); /* Thay tên file ảnh của bạn vào đây */
+    background-image: url('backgrounds_and_assets/home_1.png'); /* Thay tên file ảnh của bạn vào đây */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -124,7 +124,7 @@ justify-content: center;
 align-items: center;
 position: relative;
 padding: 2rem 4rem;
-background-image: url('/backgrounds_and_assets/intro.png');
+background-image: url('backgrounds_and_assets/intro.png');
 background-size: cover;
 background-position: center;
 background-repeat: no-repeat;
@@ -254,7 +254,7 @@ position: relative;
 display: flex;
 justify-content: center;
 align-items: center;
-background-image: url('/backgrounds_and_assets/landing.png');
+background-image: url('backgrounds_and_assets/landing.png');
 background-size: cover;
 background-position: center;
 background-repeat: no-repeat;
@@ -273,7 +273,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 pointer-events: none; 
-background-image: url('/backgrounds_and_assets/Asset\ 11.svg');
+background-image: url('backgrounds_and_assets/Asset\ 11.svg');
 }
 
 .placeholder-svg {
@@ -388,7 +388,7 @@ opacity: 1;
     height: 100vh;
     padding: 2.5rem 3.5rem;
     color: #ffffff;
-    background-image: url('/backgrounds_and_assets/thực.png');
+    background-image: url('backgrounds_and_assets/thực.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -511,7 +511,7 @@ opacity: 1;
 .spot-1 .red-placeholder-shape {
     width: 120%;
     height: 120%;
- background-image: url('/backgrounds_and_assets/vit.png');
+ background-image: url('backgrounds_and_assets/vit.png');
  mix-blend-mode:hard-light; 
 }
 
@@ -530,7 +530,7 @@ opacity: 1;
     width: 160%;
     height: 160%;
     bottom:2px;
-    background-image: url('/backgrounds_and_assets/banh.png');
+    background-image: url('backgrounds_and_assets/banh.png');
    mix-blend-mode:hard-light;
 }
 
@@ -548,7 +548,7 @@ opacity: 1;
 .spot-3 .red-placeholder-shape {
     width: 120%;
     height: 120%;
-    background-image: url('/backgrounds_and_assets/mi.png'); 
+    background-image: url('backgrounds_and_assets/mi.png'); 
     mix-blend-mode:hard-light;
 }
 
@@ -566,7 +566,7 @@ opacity: 1;
 .spot-4 .red-placeholder-shape {
     width: 120%;
     height: 120%;
-    background-image: url('/backgrounds_and_assets/bao.png');
+    background-image: url('backgrounds_and_assets/bao.png');
     mix-blend-mode:hard-light;
 }
 /* ==========================================
@@ -588,7 +588,7 @@ opacity: 1;
     padding: 3rem;
     box-sizing: border-box;
     /* BACKGROUND IMAGE PLACEHOLDER */
-    background-image: url('/backgrounds_and_assets/y.png');
+    background-image: url('backgrounds_and_assets/y.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -689,7 +689,7 @@ opacity: 1;
     padding: 3rem;
     box-sizing: border-box;
     /* BACKGROUND IMAGE PLACEHOLDER */
-    background-image: url('/backgrounds_and_assets/thưởng.png');
+    background-image: url('backgrounds_and_assets/thưởng.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -809,7 +809,7 @@ opacity: 1;
     padding: 3rem;
     box-sizing: border-box;
     /* BACKGROUND IMAGE PLACEHOLDER */
-    background-image: url('/backgrounds_and_assets/dược.png');
+    background-image: url('backgrounds_and_assets/dược.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
